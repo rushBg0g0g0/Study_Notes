@@ -1,5 +1,7 @@
 # Git总结(版本控制软件)
 - [Git总结(版本控制软件)](#git总结版本控制软件)
+  - [0.快捷操作](#0快捷操作)
+    - [0.1 命令行下远程仓库与本地仓库交互](#01-命令行下远程仓库与本地仓库交互)
   - [1.基础概念](#1基础概念)
     - [1.0版本号](#10版本号)
       - [1.0.1版本号_文件操作](#101版本号_文件操作)
@@ -28,6 +30,22 @@
       - [3.4.4 远程仓库](#344-远程仓库)
   - [4.问题及解决](#4问题及解决)
     - [4.1本地仓库在https下无法推送到远程仓库](#41本地仓库在https下无法推送到远程仓库)
+
+## 0.快捷操作
+### 0.1 命令行下远程仓库与本地仓库交互
+1.本地仓库到远程仓库
+```
+git add xx(文件名)
+git commit -m yy(提交描述)
+git push origin          
+```
+2.远程仓库拉到本地
+```
+第一次拉取
+git clone xx(地址)
+后续从origin地址拉取
+git pull origin
+```
 
 ## 1.基础概念
 1.集中式版本控制
@@ -313,9 +331,19 @@ git pull origin
 ## 4.问题及解决
 ### 4.1本地仓库在https下无法推送到远程仓库
 即执行指令 git push origin失败
-相关描述 fatal: unable to access 'https://github.com/rushBg0g0g0/Study_Notes.git/': Failed to connect to github.com port 443 after 21094 ms: Couldn't connect to server
+相关描述 fatal: unable to access ' https://github.com/*** ': Failed to connect to github.com port 443 after 21094 ms: Couldn't connect to server
 
-解决：在命令行中键入
+解决：
+原因：由于挂了vpn后导致本机端口号与git的端口号不一致
+sol_1:在打开vpn情况下使端口匹配
+1.查看本机系统端口号：设置---网络和Internet---代理，找到端口号xxx
+2.在本仓库命令行中输入指令使得端口号一致
+git config --global http.proxy 127.0.0.1:xxx
+git config --global https.proxy 127.0.0.1:xxx
+
+sol_2:未开启vpn情况下
+直接去掉git代理
+命令行中输入
 git config --global --unset http.proxy
 git config --global --unset https.proxy
 以此取消http和https的代理
