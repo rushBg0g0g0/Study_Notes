@@ -26,6 +26,8 @@
       - [3.4.2 分支相关](#342-分支相关)
       - [3.4.3 标签相关](#343-标签相关)
       - [3.4.4 远程仓库](#344-远程仓库)
+  - [4.问题及解决](#4问题及解决)
+    - [4.1本地仓库在https下无法推送到远程仓库](#41本地仓库在https下无法推送到远程仓库)
 
 ## 1.基础概念
 1.集中式版本控制
@@ -307,3 +309,14 @@ git push origin
 4.远程仓库拉取文件到本地仓库
 git pull origin
 ```
+
+## 4.问题及解决
+### 4.1本地仓库在https下无法推送到远程仓库
+即执行指令 git push origin失败
+相关描述 fatal: unable to access 'https://github.com/rushBg0g0g0/Study_Notes.git/': Failed to connect to github.com port 443 after 21094 ms: Couldn't connect to server
+
+解决：在命令行中键入
+git config --global --unset http.proxy
+git config --global --unset https.proxy
+以此取消http和https的代理
+
